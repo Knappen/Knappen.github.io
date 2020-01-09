@@ -1,0 +1,364 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Dual Sinewave/Wavelength Visualization Tool v1.01a</title>
+<!--
+/* Dual Sinewave/Wavelength Simulator Version 1.01a	 */
+/* Written by Kurt Knappen	from Galesville, WI			 */
+/* on January 8, 2009											 */
+/* Provided to the Free Energy developement community. */
+/* Use and distribute at will. No rights are reserved. */
+-->
+</head>
+<body topmargin="0" marginwidth="0" marginheight="0" leftmargin="0" rightmargin="0" text="#000000" bgcolor="white">
+	<form action="ImgMan2.htm" method="POST" name="SineForm">
+	<table cellspacing="0" cellpadding="0" border="1">
+		<tr>
+			<td width="85" height="30" bgcolor="red" align="center" valign="middle"><font face="Times New Roman, serif" color="white"><b>coil a</b></font></td>
+			<td width="720" align="center" valign="middle">
+				<table cellspacing="0" cellpadding="0" border="0">
+					<tr>
+						<td width="240" align="center" valign="middle">
+							Redraw Rate: <input type="text" name="rr" size="4" maxlength="6" value="100"> mS</td>
+						<td width="240" align="center" valign="middle">
+							Redraw Step: <input type="text" name="rs" size="4" maxlength="4" value="10"> (-)(0-360)x</td>
+						<td width="240" align="center" valign="middle">
+							Resolution: <input type="text" name="rt" size="4" maxlength="4" value="5"> (>0)</td>
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td width="85" bgcolor="blue" align="center" valign="middle"><font face="Times New Roman, serif" color="white"><b>coil b</b></font></td>
+		</tr>
+		<tr>
+			<td height="632" rowspan="3" align="center" valign="top">
+				<table cellspacing="0" cellpadding="0" border="0">
+					<tr>
+						<td height="400" align="center" valign="top">
+							Freqency<br>divided by<br>Wavelength<br>
+							<input type="text" name="wL1" size="4" maxlength="4" value="1"><br>
+							Phase<br>
+							<input type="text" name="ph1" size="4" maxlength="4" value="0"><br>
+							Amplitude<br>
+							<input type="text" name="amp1" size="4" maxlength="4" value="100"><br><br>
+							Wave Type<br>
+							<table cellspacing="0" cellpadding="0" border="0">
+								<tr><td align="right">Travelling<input type="radio" name="wta" value="0" checked></td></tr>
+								<tr><td align="right">Standing<input type="radio" name="wta" value="1"></td></tr>
+							</table><br>
+							Source -><br>
+							<font face="Times New Roman, serif" color="blue"><b>b</b></font><input type="radio" name="sb" value="0"> <font face="Times New Roman, serif" color="red"><b>a</b></font><input type="radio" name="sa" value="0" checked><br>
+							Rectify<br>
+							FW<input type="checkbox" onclick='javascript:document.SineForm.hw1.checked=false;' name="fw1" value="1"><br>
+							HW<input type="checkbox" onclick='javascript:document.SineForm.fw1.checked=false;' name="hw1" value="2"><br>
+							Polarity<br>
+							<input type="radio" name="pp1" value="1"><b>-/+</b><input type="radio" name="pp1" value="0" checked></td>
+					</tr>
+					<tr>
+						<td height="232" align="center" valign="bottom">
+							<font face="Times New Roman, serif" color="red"><b>a</b></font> <b>+</b> <font face="Times New Roman, serif" color="blue"><b>b</b></font><br>
+							<font face="Times New Roman, serif" color="green">Sum</font><input type="radio" name="SumIt" value="0" checked></td>
+					</tr>
+				</table>
+			</td>
+			<td><canvas id="sines" width="720" height="200"></canvas></td>
+			<td align="center" rowspan="3" valign="top">
+				<table cellspacing="0" cellpadding="0" border="0">
+					<tr>
+						<td height="400" align="center" valign="top">
+							Freqency<br>divided by<br>Wavelength<br>
+							<input type="text" name="wL2" size="4" maxlength="4" value="1"><br>
+							Phase<br>
+							<input type="text" name="ph2" size="4" maxlength="4" value="0"><br>
+							Amplitude<br>
+							<input type="text" name="amp2" size="4" maxlength="4" value="100"><br><br>
+							Wave Type<br>
+							<table cellspacing="0" cellpadding="0" border="0">
+								<tr><td align="left"><input type="radio" name="wtb" value="0" checked>Travelling</td></tr>
+								<tr><td align="left"><input type="radio" name="wtb" value="1">Standing</td></tr>
+							</table><br>
+							<- Source<br>
+							<input type="radio" name="sb" value="1" checked><font face="Times New Roman, serif" color="blue"><b>b</b></font> <input type="radio" name="sa" value="1"><font face="Times New Roman, serif" color="red"><b>a</b></font><br>
+							Rectify<br>
+							<input type="checkbox" onclick='javascript:document.SineForm.hw2.checked=false;' name="fw2" value="1">FW<br>
+							<input type="checkbox" onclick='javascript:document.SineForm.fw2.checked=false;' name="hw2" value="2">HW<br>
+							Polarity<br>
+							<input type="radio" name="pp2" value="0" checked><b>+/-</b><input type="radio" name="pp2" value="1"></td>
+					</tr>
+					<tr>
+						<td height="232" align="center" valign="bottom">
+							<font face="Times New Roman, serif" color="red"><b>a</b></font> <b>-</b> <font face="Times New Roman, serif" color="blue"><b>b</b></font><br>
+							<input type="radio" name="SumIt" value="1"><font face="Times New Roman, serif" color="green">Dif</font></td>
+					</tr>
+				</table>
+			</td>
+		<tr>
+			<td height="30" align="center" valign="middle"><font face="Times New Roman, serif"><b>&lt;----&lt; Conductor(s) Wavelength &gt;----&gt;</b></font></td>
+		</tr>
+		<tr>
+			<td><canvas id="sumdif" width="720" height="400"></canvas></td>
+		</tr>
+		<tr>
+			<td height="30" align="center" valign="middle"><input type="button" name="sl" value="<- step" onClick="javascript:drawSines(((parseInt((document.SineForm.sc.value)*200)/100)-(parseInt((document.SineForm.rs.value)*200)/100)));"></td>
+			<td align="center" valign="middle"><input type="button" name="rq" value="reset" onClick="javascript:document.SineForm.pr.value='>'; drawSines(0);"><input type="text" name="sc" size="4" maxlength="4" value="0"><input type="button" name="pr" value="||" onClick="javascript:if (this.value=='||') {play=false; this.value='>'; document.SineForm.sl.disabled=false; document.SineForm.sr.disabled=false; document.SineForm.rq.disabled=false;} else {play=true; document.SineForm.sl.disabled=true; document.SineForm.sr.disabled=true; document.SineForm.rq.disabled=true; this.value='||'; drawSines(parseInt(document.SineForm.sc.value*200)/100);}"></td>
+			<td align="center" valign="middle"><input type="button" name="sr" value="step ->" onClick="javascript:drawSines(((parseInt((document.SineForm.sc.value)*200)/100)+(parseInt((document.SineForm.rs.value)*200)/100)));"></td>
+		</tr>
+	</table>
+	<table cellspacing="0" cellpadding="0" border="0">
+		<tr>
+			<td width="440"><font face="Times New Roman, serif" color="maroon">Dual Sinewave/Wavelength Visualization Tool v1.01a</font></td>
+			<td width="443" align="right"><font face="Times New Roman, serif" color="maroon"><i>no rights reserved</i></font></td>
+		</tr>
+	</table>
+	</form>
+</body>
+<script type="application/x-javascript">
+<!--
+var dSf = document.SineForm;
+dSf.sl.disabled = true;
+dSf.sr.disabled = true;
+dSf.rq.disabled = true;
+var play = true;
+var WaveLength1 = 1;
+var WaveLength2 = 1;
+var Amplitude1 = 100;
+var Amplitude2 = 100;
+if (Amplitude2 > Amplitude1) var MaimAmplitude = Amplitude2;
+else var MaimAmplitude = Amplitude1;
+var vOffset1 = 100;
+var vOffset2 = 200;
+var phase1 = 0;
+var phase2 = 0;
+var phaseWave1 = 0;
+var phaseWave2 = 0;
+var flipPhase = 0;
+var xEnd = 0;
+var X1_1 = 0;
+var X1_2 = 0;
+var Y1_1 = 0;
+var Y1_2 = 0;
+var Y2_1 = 0;
+var Y2_2 = 0;
+var sines = document.getElementById("sines");
+var sumdif = document.getElementById("sumdif");
+var ctx1 = sines.getContext("2d");
+var ctx2 = sumdif.getContext("2d");
+ctx1.lineWidth = 1;
+ctx2.lineWidth = 1;
+ctx2.strokeStyle = "#00FF00";
+var redrawRate = 100;
+var redrawStep = 10;
+var res = 5;
+function drawSines(xStart)
+{
+	WaveLength1 = parseInt((dSf.wL1.value) * 100) / 200;
+	WaveLength2 = parseInt((dSf.wL2.value) * 100) / 200;
+	phase1 = parseInt((dSf.ph1.value) * 100) / 100;
+	phase2 = parseInt((dSf.ph2.value) * 100) / 100;
+	phaseWave1 = phase1 / WaveLength1;
+	phaseWave2 = phase2 / WaveLength2;
+	flipPhase = (180 - xStart) * 2;
+	Amplitude1 = parseInt((dSf.amp1.value) * 100) / 100;
+	Amplitude2 = parseInt((dSf.amp2.value) * 100) / 100;
+	ctx2.clearRect(0, 0, sumdif.width, sumdif.height);
+	ctx1.clearRect(0, 0, sines.width, sines.height);
+	xEnd = 720 + xStart;
+	X1_1 = xStart;
+	if (dSf.wta[1].checked)
+	{
+		Y1_1 = (Amplitude1 / 2) * (Math.sin((((X1_1 + phaseWave1) * WaveLength1) / 180) * Math.PI) + Math.sin((((X1_1 + phaseWave1 + flipPhase) * WaveLength1) / 180) * Math.PI));
+		dSf.sa[0].disabled = true;
+		dSf.sa[1].disabled = true;
+	}
+	else
+	{
+		dSf.sa[0].disabled = false;
+		dSf.sa[1].disabled = false;
+		if (dSf.sa[1].checked)
+		{
+			Y1_1 = Amplitude1 * Math.sin((((X1_1 + phaseWave1) * WaveLength1) / 180) * Math.PI);
+		}
+		else
+		{
+			Y1_1 = Amplitude1 * Math.sin((((X1_1 + phaseWave1 + flipPhase) * WaveLength1) / 180) * Math.PI);
+		}
+	}
+	if (dSf.hw1.checked)
+	{
+		if (dSf.pp1[1].checked)
+		{
+			if (Y1_1 < 0) Y1_1 = 0;
+		}
+		else
+		{
+			if (Y1_1 > 0) Y1_1 = 0;
+		}
+	}
+	else if (dSf.fw1.checked)
+	{
+		if (dSf.pp1[1].checked)
+		{
+			if (Y1_1 < 0) Y1_1 = -Y1_1;
+		}
+		else
+		{
+			if (Y1_1 > 0) Y1_1 = -Y1_1;
+		}
+	}
+	else if (dSf.pp1[1].checked) Y1_1 = -Y1_1;
+	if (dSf.wtb[1].checked)
+	{
+		Y2_1 = (Amplitude2 / 2) * (Math.sin((((X1_1 + phaseWave2) * WaveLength2) / 180) * Math.PI) + Math.sin((((X1_1 + phaseWave2 + flipPhase) * WaveLength2) / 180) * Math.PI));
+		dSf.sb[0].disabled = true;
+		dSf.sb[1].disabled = true;
+	}
+	else
+	{
+		dSf.sb[0].disabled = false;
+		dSf.sb[1].disabled = false;
+		if (dSf.sb[1].checked)
+		{
+			Y2_1 = Amplitude2 * Math.sin((((X1_1 + phaseWave2) * WaveLength2) / 180) * Math.PI);
+		}
+		else
+		{
+			Y2_1 = Amplitude2 * Math.sin((((X1_1 + phaseWave2 + flipPhase) * WaveLength2) / 180) * Math.PI);
+		}
+	}
+	if (dSf.hw2.checked)
+	{
+		if (dSf.pp2[0].checked)
+		{
+			if (Y2_1 < 0) Y2_1 = 0;
+		}
+		else
+		{
+			if (Y2_1 > 0) Y2_1 = 0;
+		}
+	}
+	else if (dSf.fw2.checked)
+	{
+		if (dSf.pp2[0].checked)
+		{
+			if (Y2_1 < 0) Y2_1 = -Y2_1;
+		}
+		else
+		{
+			if (Y2_1 > 0) Y2_1 = -Y2_1;
+		}
+	}
+	else if (dSf.pp2[1].checked) Y2_1 = -Y2_1;
+	ctx2.beginPath();
+	if (dSf.SumIt[0].checked) ctx2.moveTo((X1_1 - xStart), vOffset2 - (Y1_1 + Y2_1));
+	else ctx2.moveTo((X1_1 - xStart), vOffset2 - (Y1_1 - Y2_1));
+	res = parseInt(dSf.rt.value);
+	for (X1_2 = (X1_1 + res); X1_2 < (xEnd + res); X1_2 += res)
+	{
+		if (dSf.wta[1].checked)
+		{
+			Y1_2 = (Amplitude1 / 2) * (Math.sin((((X1_2 + phaseWave1) * WaveLength1) / 180) * Math.PI) + Math.sin((((X1_2 + phaseWave1 + flipPhase) * WaveLength1) / 180) * Math.PI));
+		}
+		else
+		{
+			if (dSf.sa[1].checked)
+			{
+				Y1_2 = Amplitude1 * Math.sin((((X1_2 + phaseWave1) * WaveLength1) / 180) * Math.PI);
+			}
+			else
+			{
+				Y1_2 = Amplitude1 * Math.sin((((X1_2 + phaseWave1 + flipPhase) * WaveLength1) / 180) * Math.PI);
+			}
+		}
+		if (dSf.hw1.checked)
+		{
+			if (dSf.pp1[1].checked)
+			{
+				if (Y1_2 < 0) Y1_2 = 0;
+			}
+			else
+			{
+				if (Y1_2 > 0) Y1_2 = 0;
+			}
+		}
+		else if (dSf.fw1.checked)
+		{
+			if (dSf.pp1[1].checked)
+			{
+				if (Y1_2 < 0) Y1_2 = -Y1_2;
+			}
+			else
+			{
+				if (Y1_2 > 0) Y1_2 = -Y1_2;
+			}
+		}
+		else if (dSf.pp1[1].checked) Y1_2 = -Y1_2;
+		if (dSf.wtb[1].checked)
+		{
+			Y2_2 = (Amplitude2 / 2) * (Math.sin((((X1_2 + phaseWave2) * WaveLength2) / 180) * Math.PI) + Math.sin((((X1_2 + phaseWave2 + flipPhase) * WaveLength2) / 180) * Math.PI));
+		}
+		else
+		{
+			if (dSf.sb[1].checked)
+			{
+				Y2_2 = Amplitude2 * Math.sin((((X1_2 + phaseWave2) * WaveLength2) / 180) * Math.PI);
+			}
+			else
+			{
+				Y2_2 = Amplitude2 * Math.sin((((X1_2 + phaseWave2 + flipPhase) * WaveLength2) / 180) * Math.PI);
+			}
+		}
+		if (dSf.hw2.checked)
+		{
+			if (dSf.pp2[0].checked)
+			{
+				if (Y2_2 < 0) Y2_2 = 0;
+			}
+			else
+			{
+				if (Y2_2 > 0) Y2_2 = 0;
+			}
+		}
+		else if (dSf.fw2.checked)
+		{
+			if (dSf.pp2[0].checked)
+			{
+				if (Y2_2 < 0) Y2_2 = -Y2_2;
+			}
+			else
+			{
+				if (Y2_2 > 0) Y2_2 = -Y2_2;
+			}
+		}
+		else if (dSf.pp2[1].checked) Y2_2 = -Y2_2;
+		ctx1.strokeStyle = "#FF0000";
+		ctx1.beginPath();
+		ctx1.moveTo((X1_1 - xStart), vOffset1 - Y1_1);
+		ctx1.lineTo((X1_2 - xStart), vOffset1 - Y1_2);
+		ctx1.stroke();
+		ctx1.strokeStyle = "#0000FF";
+		ctx1.beginPath();
+		ctx1.moveTo((X1_1 - xStart), vOffset1 - Y2_1);
+		ctx1.lineTo((X1_2 - xStart), vOffset1 - Y2_2);
+		ctx1.stroke();
+		if (dSf.SumIt[0].checked) ctx2.lineTo((X1_2 - xStart), vOffset2 - (Y1_2 + Y2_2));
+		else ctx2.lineTo((X1_2 - xStart), vOffset2 - (Y1_2 - Y2_2));
+		X1_1 = X1_2;
+		Y1_1 = Y1_2;
+		Y2_1 = Y2_2;
+	}
+	ctx2.stroke();
+	dSf.sc.value = ((xStart) % 720) / 2;
+	redrawRate = parseInt((dSf.rr.value) * 100) / 100;
+	redrawStep = parseInt((dSf.rs.value) * 200) / 100;
+	if (play)
+	{
+		xStart += redrawStep;
+		window.setTimeout('drawSines('+xStart+')', parseInt(redrawRate * 100) / 100);
+	}
+	return;
+}
+dSf.sc.value = 0;
+drawSines(0);
+//-->
+</script>
+</html>
