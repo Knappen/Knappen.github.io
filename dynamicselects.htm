@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+<title>Untitled</title>
+<SCRIPT language=JavaScript>
+<!--
+var NS4 = (navigator.appName == "Netscape" && parseInt(navigator.appVersion) < 5);
+var selOptsVals = new Array(3);
+var selOptsTxts = new Array(3);
+
+selOptsVals[0] = new Array(3);
+selOptsTxts[0] = new Array(3);
+selOptsVals[0][0] = new Array(4);
+selOptsVals[0][0][0] = 1;
+selOptsVals[0][0][1] = 2;
+selOptsVals[0][0][2] = 3;
+selOptsVals[0][0][3] = 4;
+selOptsTxts[0][0] = new Array(4);
+selOptsTxts[0][0][0] = '2-1/2';
+selOptsTxts[0][0][1] = '3';
+selOptsTxts[0][0][2] = '3½';
+selOptsTxts[0][0][3] = '4';
+selOptsVals[0][1] = new Array(2);
+selOptsVals[0][1][0] = 1;
+selOptsVals[0][1][1] = 3;
+selOptsTxts[0][1] = new Array(2);
+selOptsTxts[0][1][0] = '4';
+selOptsTxts[0][1][1] = '4½';
+selOptsVals[0][2] = new Array(3);
+selOptsVals[0][2][0] = 1;
+selOptsVals[0][2][1] = 2;
+selOptsVals[0][2][2] = 3;
+selOptsTxts[0][2] = new Array(3);
+selOptsTxts[0][2][0] = '8';
+selOptsTxts[0][2][1] = '9';
+selOptsTxts[0][2][2] = '10';
+
+selOptsVals[1] = new Array(2);
+selOptsTxts[1] = new Array(2);
+selOptsVals[1][0] = new Array(5);
+selOptsVals[1][0][0] = 1;
+selOptsVals[1][0][1] = 2;
+selOptsVals[1][0][2] = 3;
+selOptsVals[1][0][3] = 4;
+selOptsVals[1][0][4] = 5;
+selOptsTxts[1][0] = new Array(5);
+selOptsTxts[1][0][0] = '6';
+selOptsTxts[1][0][1] = '6½';
+selOptsTxts[1][0][2] = '7';
+selOptsTxts[1][0][3] = '7½';
+selOptsTxts[1][0][4] = '8';
+selOptsVals[1][1] = new Array(3);
+selOptsVals[1][1][0] = 1;
+selOptsVals[1][1][1] = 2;
+selOptsVals[1][1][2] = 3;
+selOptsTxts[1][1] = new Array(3);
+selOptsTxts[1][1][0] = '1';
+selOptsTxts[1][1][1] = '2';
+selOptsTxts[1][1][2] = '3';
+
+selOptsVals[2] = new Array(4);
+selOptsTxts[2] = new Array(4);
+selOptsVals[2][0] = new Array(4);
+selOptsVals[2][0][0] = 1;
+selOptsVals[2][0][1] = 2;
+selOptsVals[2][0][2] = 3;
+selOptsVals[2][0][3] = 4;
+selOptsTxts[2][0] = new Array(4);
+selOptsTxts[2][0][0] = '21';
+selOptsTxts[2][0][1] = '22';
+selOptsTxts[2][0][2] = '23';
+selOptsTxts[2][0][3] = '24';
+selOptsVals[2][1] = new Array(3);
+selOptsVals[2][1][0] = 1;
+selOptsVals[2][1][1] = 2;
+selOptsVals[2][1][2] = 3;
+selOptsTxts[2][1] = new Array(3);
+selOptsTxts[2][1][0] = '31½';
+selOptsTxts[2][1][1] = '32';
+selOptsTxts[2][1][2] = '32½';
+selOptsVals[2][2] = new Array(4);
+selOptsVals[2][2][0] = 1;
+selOptsVals[2][2][1] = 2;
+selOptsVals[2][2][2] = 3;
+selOptsVals[2][2][3] = 4;
+selOptsTxts[2][2] = new Array(4);
+selOptsTxts[2][2][0] = '61';
+selOptsTxts[2][2][1] = '62';
+selOptsTxts[2][2][2] = '63';
+selOptsTxts[2][2][3] = '64';
+selOptsVals[2][3] = new Array(3);
+selOptsVals[2][3][0] = 1;
+selOptsVals[2][3][1] = 2;
+selOptsVals[2][3][2] = 3;
+selOptsTxts[2][3] = new Array(3);
+selOptsTxts[2][3][0] = '51';
+selOptsTxts[2][3][1] = '52';
+selOptsTxts[2][3][2] = '53';
+
+function changeSizes(selNum)
+{
+	var indx = eval('document.Products.Colors_' + selNum + '.selectedIndex') - 1;
+	var objSizes = eval('document.Products.Sizes_' + selNum);
+	objSizes.options.length = 0;
+	selNum--;
+	if (indx > -1)
+	{
+		objSizes.options[0] = new Option("Select Size","0",true,false);
+		for(var x=0; x < selOptsVals[selNum][indx].length; x++)
+		{
+			objSizes.options[x+1] = new Option(selOptsTxts[selNum][indx][x],selOptsVals[selNum][indx][x]);
+		}
+	}
+	else
+	{
+		objSizes.options[0] = new Option("Select Color","0",true,false);
+	}
+	if(NS4) history.go(0);
+}
+
+//-->
+</SCRIPT>
+</head>
+
+<body>
+<form action="test.htm" method="POST" name="Products">
+	<select name="Colors_1" onChange="changeSizes(1);">
+		<option value="0">Select Color</option>
+		<option value="1">Red</option>
+		<option value="2">Green</option>
+		<option value="3">Blue</option>
+	</select>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<select name="Sizes_1">
+		<option value="0">Select Color</option>
+	</select>
+	<br>
+	<select name="Colors_2" onChange="changeSizes(2);">
+		<option value="0">Select Color</option>
+		<option value="1">Purple</option>
+		<option value="2">Grey</option>
+	</select>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<select name="Sizes_2">
+		<option value="0">Select Color</option>
+	</select>
+	<br>
+	<select name="Colors_3" onChange="changeSizes(3);">
+		<option value="0">Select Color</option>
+		<option value="1">Tan</option>
+		<option value="2">Black</option>
+		<option value="3">White</option>
+		<option value="4">Pink</option>
+	</select>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<select name="Sizes_3">
+		<option value="0">Select Color</option>
+	</select>
+</form>
+</body>
+</html>
